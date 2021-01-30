@@ -1,3 +1,12 @@
+export interface IValidationError {
+    code: string;
+    message: string;
+    field: string | null;
+}
+
 export interface IApplicationHttpExceptionPayload {
-    statusCode
+    statusCode: number;
+    code: string;
+    message: string;
+    errors: Array<IValidationError>;
 }

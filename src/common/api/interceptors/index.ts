@@ -1,0 +1,1 @@
+export { HttpStatusCodeInterceptor } from './HttpStatusCodeInterceptor';
