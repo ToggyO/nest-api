@@ -23,8 +23,10 @@
     "paths": {
       "common/*": ["common/*"],
       "config/*": ["config/*"],
+      "dao/*": ["dao/*"],
       "domain/*": ["domain/*"],
       "modules/*": ["modules/*"],
+      "providers/*": ["providers/*"],
       "utils/*": ["utils/*"],
     }
   },

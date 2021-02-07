@@ -6,6 +6,7 @@ module.exports = {
   },
   plugins: [
     '@typescript-eslint/eslint-plugin',
+    'prettier'
     // 'import'
   ],
   extends: [
@@ -13,22 +14,22 @@ module.exports = {
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
   ],
-  // root: true,
+  root: true,
   env: {
     node: true,
     jest: true,
   },
   ignorePatterns: ['.eslintrc.js'],
-  // settings: {
-  //   'import/parsers': {
-  //     '@typescript-eslint/parser': ['.ts']
-  //   },
-  //   'import/resolver': {
-  //     typescript: {
-  //       alwaysTryTypes: true
-  //     }
-  //   }
-  // },
+  settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts']
+    },
+    'import/resolver': {
+      typescript: {
+        alwaysTryTypes: true
+      }
+    }
+  },
   rules: {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
@@ -42,7 +43,7 @@ module.exports = {
     'curly': ['warn', 'all'],
     'func-names': 'off',
     'import/prefer-default-export': 'off',
-    'max-len': ['error', { 'code': 130 }],
+    'max-len': ['error', { 'code': 120 }],
     'no-param-reassign': 'off',
     'no-plusplus': 'off',
     'no-tabs': 'off',

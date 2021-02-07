@@ -1,0 +1,26 @@
+version: '3.5'
+services:
+  nest-api-server:
+    container_name: nest-api-server
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: ${NODE_ENV}
+        API_PREFIX: ${API_PREFIX}
+        HOST: ${HOST}
+        PORT: ${PORT}
+        EXTERNAL_PORT: ${EXTERNAL_PORT}
+        DB_NAME: ${DB_NAME}
+    ports:
+      - ${EXTERNAL_PORT}:${PORT}
+    volumes:
+      - ./data/${DB_NAME}.sqlite:/data/${DB_NAME}.sqlite
+    networks:
+      - external-network
+
+networks:
+  external-network:
+    driver: bridge
+

@@ -5,11 +5,13 @@ export class ErrorMessages {
         badParameters: 'Bad parameters',
         notFound: 'Not found',
         permissionDenied: 'Permission denied',
+        unauthorized: 'Unauthorized',
+        forbidden: 'Forbidden',
         fieldInvalid: 'Invalid field',
     };
 
-    public static Common = {
-        fieldNotBlank: "The field can't be empty",
+    public static Validation = {
+        fieldNotEmpty: "The field can't be empty",
         fieldSizeMax: 'The field is too long',
         fieldSizeMin: 'The field is too short',
         fieldInvalidLength: 'The field length is not correct',
@@ -25,9 +27,6 @@ export class ErrorMessages {
     };
 
     public static Security = {
-        unauthorized: 'Unauthorized',
-        forbidden: 'Forbidden',
-        fieldAccessToken: 'accessToken',
         authDataInvalid: 'Auth data invalid',
         tokenInvalid: 'Token invalid',
         accessTokenInvalid: 'Access token invalid',
@@ -40,7 +39,7 @@ export class ErrorMessages {
     public static Business = {
         emailExists: 'This email is already registered. Sign in or use different email to register',
         invalidEmail: 'Email is invalid',
-        userDoesNotExists: 'User does not exists',
+        userDoesNotExists: 'UserOrmEntity does not exists',
         userIsDeleted: "You don't have access to system - your account is deleted",
         userIsBlocked: "You don't have access to system - your account is blocked",
         passwordChangeRequestInvalid: 'Password change request is invalid',

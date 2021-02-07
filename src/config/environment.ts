@@ -5,6 +5,7 @@ export enum Environment {
     Development = 'development',
     Staging = 'staging',
     Production = 'production',
+    Migration = 'migration',
 }
 
 export class EnvironmentVariables {
@@ -19,6 +20,12 @@ export class EnvironmentVariables {
 
     @IsNumber()
     public PORT: number;
+
+    @IsString()
+    public DB_NAME: string;
+
+    @IsString()
+    public CRYPTO_SECRET: string;
 }
 
 export function validate(config: Record<string, number>) {

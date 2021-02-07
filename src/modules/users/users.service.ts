@@ -1,16 +1,17 @@
-import { HttpStatus } from '@nestjs/common';
+import { UserEntity } from 'domain/entities/user/user.entity';
 
-import { HttpResponse, SuccessResponse } from 'common/api/responses';
-
+import { CreateUserDTO } from './dto/CreateUserDTO';
 import { IUsersService } from './users.interfaces';
 
-const obj = { test: 'test' };
-
 export class UsersService implements IUsersService {
-    getTest(): HttpResponse<typeof obj> {
-        const response = new SuccessResponse<typeof obj>();
-        response.statusCode = HttpStatus.OK;
-        response.data = obj;
-        return response;
+    public createDomainEntity(dto: CreateUserDTO): UserEntity {
+        const userEntity = new UserEntity();
+        const { salt, hash } = userEntity.createSaltAndHash(dto.password);
+        userEntity.firstName = dto.firstName;
+        userEntity.lastName = dto.lastName;
+        userEntity.email = dto.email;
+        userEntity.salt = salt;
+        userEntity.passwordHash = hash;
+        return userEntity;
     }
 }
