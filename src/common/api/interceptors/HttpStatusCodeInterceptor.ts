@@ -3,7 +3,7 @@ import { Response } from 'express';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { HttpResponse } from '../responses';
+import { HttpResponse } from '../models/responses';
 
 @Injectable()
 export class HttpStatusCodeInterceptor<T> implements NestInterceptor<T, HttpResponse<T>> {

@@ -1,7 +1,7 @@
 import { Repository } from 'typeorm';
 
 import { isObjectEmpty } from 'utils/helpers';
-import { PaginationModel } from 'common/models/pagination';
+import { PaginationModel } from 'common/api/models/pagination';
 
 import { TypeOrmPagination } from './types';
 

@@ -1,6 +1,6 @@
 import { FindOneOptions } from 'typeorm';
 
-import { PaginationModel } from 'common/models/pagination';
+import { PaginationModel } from 'common/api/models/pagination';
 
 import { FindListParameters } from './types';
 

@@ -1,7 +1,7 @@
-import { PageModel } from 'common/models/pagination';
+import { PageModel } from 'common/api/models/pagination';
 import { TypeOrmPagination } from 'dao/repositories/types';
 
-export class BaseHandler {
+export class BaseService {
     protected _getPagination(pageModel: PageModel): TypeOrmPagination {
         let page = +parseInt(pageModel.page.toString());
         let pageSize = +parseInt(pageModel.pageSize.toString());

@@ -7,11 +7,11 @@ export class HttpResponse<T> {
     public code = SUCCESS_CODE;
 }
 
-export class SuccessResponse<T> extends HttpResponse<T> {
+export class Response<T> extends HttpResponse<T> {
     public data: T;
 }
 
-export class ErrorResponse<T> extends HttpResponse<T> {
+export class ErrorResponse<T> extends Response<T> {
     public message: string;
     public errors: Array<ApiError> = [];
 }

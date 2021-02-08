@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 
-import { ApiError } from 'common/api/responses';
+import { ApiError } from 'common/api/models/responses';
 import { ApplicationHttpException } from 'common/api/exceptions';
 import { ErrorCodes, ErrorMessages } from 'common/api/errors';
 import { isObjectEmpty } from 'utils/helpers';
