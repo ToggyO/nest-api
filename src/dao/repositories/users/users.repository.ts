@@ -45,7 +45,6 @@ export class UsersRepository extends BaseRepository<UserOrmEntity> implements IU
         return this.save(model);
     }
 
-    // TODO: check parameter model (maybe annotate it as Partial)
     public async updateEntity(id: number, model: UserOrmEntity): Promise<UserOrmEntity> {
         await this.update(id, model);
         return this.getEntity({ where: { id } });

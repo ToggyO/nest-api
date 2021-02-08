@@ -7,9 +7,10 @@ import { PageModel, PaginationModel } from 'common/api/models/pagination';
 import { UsersRepository } from 'dao/repositories/users/users.repository';
 import { IUsersRepository } from 'dao/repositories/users/IUsersRepository';
 
+import { UsersMapper } from './users.mapper';
 import { CreateUserDTO } from './dto/CreateUserDTO';
 import { UserDTO } from './dto/UserDTO';
-import { UsersMapper } from './users.mapper';
+import { UpdateUserDTO } from 'modules/users/dto/UpdateUserDTO';
 
 @Injectable()
 export class UsersService extends BaseService {
@@ -48,6 +49,21 @@ export class UsersService extends BaseService {
         const user = this._mapper.mapToOrmEntity(domainEntity);
         const createdOrmEntity = await this._repository.createEntity(user);
         return this._mapper.mapToDto(createdOrmEntity);
+    }
+
+    public async updateUser(id: number, dto: UpdateUserDTO): Promise<UserDTO | null> {
+        const user = await this._repository.getEntity({ where: { id } });
+        if (!user) {
+            return null;
+        }
+        user.firstName = dto.firstName;
+        user.lastName = dto.lastName;
+        const userEntity = await this._repository.updateEntity(id, user);
+        return this._mapper.mapToDto(userEntity);
+    }
+
+    public deleteUser(id: number): Promise<void> {
+        return this._repository.deleteEntity(id);
     }
 
     public createDomainEntity(dto: CreateUserDTO): UserEntity {

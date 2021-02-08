@@ -1,13 +1,14 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 
-import { ErrorResponse, Response } from 'common/api/models/responses';
+import { ErrorResponse, NotFoundResponse, Response } from 'common/api/models/responses';
 import { UserOrmEntity } from 'dao/entities/user.orm-entity';
 import { ErrorCodes, ErrorMessages } from 'common/api/errors';
 import { PageModel, PaginationModel } from 'common/api/models/pagination';
 
+import { UsersService } from './users.service';
 import { CreateUserDTO } from './dto/CreateUserDTO';
 import { UserDTO } from './dto/UserDTO';
-import { UsersService } from './users.service';
+import { UpdateUserDTO } from './dto/UpdateUserDTO';
 
 @Injectable()
 export class UsersHandler {
@@ -23,11 +24,7 @@ export class UsersHandler {
     public async getUserById(id: number): Promise<Response<UserDTO>> {
         const userDto = await this._service.getUser(id);
         if (!userDto) {
-            const error = new ErrorResponse<UserDTO>();
-            error.statusCode = HttpStatus.NOT_FOUND;
-            error.code = ErrorCodes.Global.notFound;
-            error.message = ErrorMessages.Global.notFound;
-            return error;
+            return new NotFoundResponse();
         }
         const response = new Response<UserDTO>();
         response.data = userDto;
@@ -46,5 +43,19 @@ export class UsersHandler {
         const response = new Response<UserDTO>();
         response.data = userDto;
         return response;
+    }
+
+    public async updateUser(id: number, dto: UpdateUserDTO): Promise<Response<UserDTO>> {
+        const userDto = await this._service.updateUser(id, dto);
+        if (!userDto) {
+            return new NotFoundResponse();
+        }
+        const response = new Response<UserDTO>();
+        response.data = userDto;
+        return response;
+    }
+
+    public async deleteUser(id: number): Promise<void> {
+        return this._service.deleteUser(id);
     }
 }
