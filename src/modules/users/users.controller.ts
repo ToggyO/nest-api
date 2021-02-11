@@ -1,13 +1,15 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query, UseGuards } from '@nestjs/common';
 
 import type { Response } from 'common/api/models/responses';
 import { PaginationModel, PageModel } from 'common/api/models/pagination';
 import { UserDTO } from 'modules/users/dto/UserDTO';
+import { AuthGuard } from 'common/api/guards';
 
 import { UsersHandler } from './users.handler';
 import { CreateUserDTO } from './dto/CreateUserDTO';
 import { UpdateUserDTO } from './dto/UpdateUserDTO';
 
+@UseGuards(AuthGuard)
 @Controller('users')
 export class UsersController {
     constructor(private readonly _handler: UsersHandler) {}
@@ -35,8 +37,8 @@ export class UsersController {
         return this._handler.updateUser(id, updateUserDto);
     }
 
-    @Delete(':@id')
-    public async deleteUser(@Param('id', ParseIntPipe) id: number): Promise<void> {
+    @Delete(':id')
+    public async deleteUser(@Param('id', ParseIntPipe) id: number): Promise<Response<void>> {
         return this._handler.deleteUser(id);
     }
 }

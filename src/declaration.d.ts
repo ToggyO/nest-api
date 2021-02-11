@@ -1,6 +1,6 @@
-export declare type FunctionType = (...args: Array<any>) => any;
+export type FunctionType = (...args: Array<any>) => any;
 
-export declare type HealthCheckDTO = {
+export type HealthCheckDTO = {
     message: string;
     startedAt: string;
 };

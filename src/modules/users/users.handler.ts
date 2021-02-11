@@ -55,7 +55,8 @@ export class UsersHandler {
         return response;
     }
 
-    public async deleteUser(id: number): Promise<void> {
-        return this._service.deleteUser(id);
+    public async deleteUser(id: number): Promise<Response<void>> {
+        await this._service.deleteUser(id);
+        return new Response();
     }
 }

@@ -6,9 +6,9 @@ import { UsersModule } from 'modules/users/users.module';
 
 // Application providers
 import { DatabaseModule } from 'providers/database/database.module';
-import { CryptoService } from 'providers/crypto';
+import { RedisClientModule } from 'providers/redis';
+import { TokensModule } from 'providers/tokens';
 
-import { DI_TOKENS } from './tokens';
 import type { AppModuleExports, AppModuleImports } from './types';
 import { Environment, validate } from './environment';
 
@@ -21,14 +21,11 @@ export class AppModuleConfiguration implements ModuleMetadata {
             validate,
         }),
         DatabaseModule,
+        RedisClientModule,
+        TokensModule,
         UsersModule,
     ];
     public readonly controllers: Array<Type<any>> = [];
-    public readonly providers: Array<Provider> = [
-        {
-            provide: DI_TOKENS.ICryptoService,
-            useClass: CryptoService,
-        },
-    ];
-    public readonly exports: AppModuleExports = [DI_TOKENS.ICryptoService];
+    public readonly providers: Array<Provider> = [];
+    public readonly exports: AppModuleExports = [];
 }

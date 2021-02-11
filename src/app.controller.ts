@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 
-import type { HealthCheckDTO } from './declaration';
+import { HealthCheckDTO } from 'declaration';
 
 @Controller()
 export class AppController {

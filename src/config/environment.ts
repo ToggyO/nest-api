@@ -1,31 +1,11 @@
 import { plainToClass } from 'class-transformer';
-import { IsEnum, IsNumber, IsString, validateSync } from 'class-validator';
+import { IsEnum, IsNumber, IsNotEmpty, validateSync } from 'class-validator';
 
 export enum Environment {
     Development = 'development',
     Staging = 'staging',
     Production = 'production',
     Migration = 'migration',
-}
-
-export class EnvironmentVariables {
-    @IsEnum(Environment)
-    public NODE_ENV: Environment;
-
-    @IsString()
-    public API_PREFIX: string;
-
-    @IsString()
-    public HOST: string;
-
-    @IsNumber()
-    public PORT: number;
-
-    @IsString()
-    public DB_NAME: string;
-
-    @IsString()
-    public CRYPTO_SECRET: string;
 }
 
 export function validate(config: Record<string, number>) {
@@ -41,4 +21,54 @@ export function validate(config: Record<string, number>) {
     }
 
     return validatedConfig;
+}
+
+export class EnvironmentVariables {
+    @IsEnum(Environment)
+    public NODE_ENV: Environment;
+
+    @IsNotEmpty()
+    public API_PREFIX: string;
+
+    @IsNotEmpty()
+    public HOST: string;
+
+    @IsNotEmpty()
+    public PORT: number;
+
+    @IsNotEmpty()
+    public DB_NAME: string;
+
+    @IsNotEmpty()
+    public CRYPTO_SECRET: string;
+
+    @IsNotEmpty()
+    public AUTH_HEADER: string;
+
+    @IsNotEmpty()
+    public IDENTITY_HEADER: string;
+
+    @IsNotEmpty()
+    public JWT_SECRET: string;
+
+    @IsNotEmpty()
+    public SESSION_MAX_AGE: string;
+
+    @IsNotEmpty()
+    public REDIS_HOST: string;
+
+    @IsNotEmpty()
+    public REDIS_PASSWORD: string;
+
+    @IsNumber()
+    public REDIS_DB: number;
+
+    @IsNumber()
+    public REDIS_PORT: number;
+
+    @IsNumber()
+    public REDIS_EXTERNAL_PORT: number;
+
+    @IsNotEmpty()
+    public REDIS_TOKEN_PREFIX: string;
 }

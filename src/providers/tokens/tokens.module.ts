@@ -3,16 +3,15 @@ import { ConfigModule } from '@nestjs/config';
 
 import { DI_TOKENS } from 'config';
 
-import { CryptoService } from './crypto.service';
+import { TokensService } from './tokens.service';
 
 @Module({
     imports: [ConfigModule],
     providers: [
         {
-            provide: DI_TOKENS.ICryptoService,
-            useClass: CryptoService,
+            provide: DI_TOKENS.ITokensService,
+            useClass: TokensService,
         },
     ],
-    exports: [DI_TOKENS.ICryptoService],
 })
-export class CryptoModule {}
+export class TokensModule {}
