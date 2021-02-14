@@ -1,8 +1,9 @@
-import { ModuleMetadata, Provider, Type } from '@nestjs/common';
+import type { ModuleMetadata, Provider, Type } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
 // Api modules
 import { UsersModule } from 'modules/users/users.module';
+import { AuthModule } from 'modules/auth/auth.module';
 
 // Application providers
 import { DatabaseModule } from 'providers/database/database.module';
@@ -24,6 +25,7 @@ export class AppModuleConfiguration implements ModuleMetadata {
         RedisClientModule,
         TokensModule,
         UsersModule,
+        AuthModule,
     ];
     public readonly controllers: Array<Type<any>> = [];
     public readonly providers: Array<Provider> = [];

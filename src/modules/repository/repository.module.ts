@@ -1,12 +1,17 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { Connection } from 'typeorm';
 
+import { DI_TOKENS } from 'config';
 import { UsersRepository } from 'dao/repositories/users/users.repository';
 
-const repositories = TypeOrmModule.forFeature([UsersRepository]);
-
 @Module({
-    imports: [repositories],
-    exports: [repositories],
+    providers: [
+        {
+            provide: DI_TOKENS.IUsersRepository,
+            useFactory: (connection: Connection) => connection.getCustomRepository(UsersRepository),
+            inject: [Connection],
+        },
+    ],
+    exports: [DI_TOKENS.IUsersRepository],
 })
 export class RepositoryModule {}

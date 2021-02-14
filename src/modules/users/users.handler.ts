@@ -1,14 +1,12 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 
 import { ErrorResponse, NotFoundResponse, Response } from 'common/api/models/responses';
-import { UserOrmEntity } from 'dao/entities/user.orm-entity';
+import type { UserOrmEntity } from 'dao/entities/user.orm-entity';
 import { ErrorCodes, ErrorMessages } from 'common/api/errors';
-import { PageModel, PaginationModel } from 'common/api/models/pagination';
+import type { PageModel, PaginationModel } from 'common/api/models/pagination';
 
 import { UsersService } from './users.service';
-import { CreateUserDTO } from './dto/CreateUserDTO';
-import { UserDTO } from './dto/UserDTO';
-import { UpdateUserDTO } from './dto/UpdateUserDTO';
+import type { CreateUserDTO, UpdateUserDTO, UserDTO } from './dto';
 
 @Injectable()
 export class UsersHandler {
@@ -22,7 +20,7 @@ export class UsersHandler {
     }
 
     public async getUserById(id: number): Promise<Response<UserDTO>> {
-        const userDto = await this._service.getUser(id);
+        const userDto = await this._service.getUserById(id);
         if (!userDto) {
             return new NotFoundResponse();
         }

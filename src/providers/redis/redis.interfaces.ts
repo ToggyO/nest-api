@@ -1,10 +1,10 @@
-import { NoInferType } from '@nestjs/config';
-import { Callback, KeyType, Ok } from 'ioredis';
+import type { NoInferType } from '@nestjs/config';
+import type { Callback, KeyType, Ok } from 'ioredis';
 
 export interface IRedisProvider {
-    serializeAndSet<T>(key: KeyType, value: T, cb?: Callback<Ok>): void;
+    serializeAndSet<T>(key: KeyType, value: T, cb: Callback<Ok>): void;
     serializeAndSetAsync<T>(key: KeyType, value: T): Promise<Ok | null>;
-    serializeAndSetWithExpiration<T>(key: string, value: T, expire?: number, cb?: Callback<Ok>): void;
+    serializeAndSetWithExpiration<T>(key: string, value: T, expire: number, cb: Callback<Ok>): void;
     serializeAndSetWithExpirationAsync<T>(key: string, value: T, expire: number): Promise<Ok | null>;
     getAndDeserializeAsync<T>(key: KeyType): Promise<T>;
     getAndDeserializeAsync<T>(key: KeyType, defaultValue: NoInferType<T>): Promise<T>;

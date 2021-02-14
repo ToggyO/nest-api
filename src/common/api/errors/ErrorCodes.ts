@@ -10,6 +10,7 @@ export class ErrorCodes {
     };
 
     public static Validation = {
+        fieldInvalidType: 'validation.field_invalid_type',
         fieldNotEmpty: 'validation.field_not_empty',
         fieldSizeMax: 'validation.field_size_max',
         fieldSizeMin: 'validation.field_size_min',

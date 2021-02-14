@@ -1,5 +1,6 @@
-import { ConfigService } from '@nestjs/config';
-import { RedisModuleOptions } from 'nestjs-redis';
+import type { ConfigService } from '@nestjs/config';
+import type { RedisModuleOptions } from 'nestjs-redis';
+
 import { Environment } from 'config/environment';
 
 export const getRedisConfig = (configService: ConfigService): RedisModuleOptions => ({
@@ -10,5 +11,6 @@ export const getRedisConfig = (configService: ConfigService): RedisModuleOptions
             : configService.get<number>('REDIS_PORT'),
     db: configService.get<number>('REDIS_DB'),
     password: configService.get<string>('REDIS_PASSWORD'),
-    keyPrefix: configService.get<string>('REDIS_TOKEN_PREFIX'),
+    keyPrefix: `${configService.get<string>('REDIS_TOKEN_PREFIX')}_`,
+    enableReadyCheck: true,
 });

@@ -31,11 +31,13 @@ module.exports = {
     }
   },
   rules: {
+    'prettier/prettier': ['error'],
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-empty-function': ['error', { 'allow': ['methods','constructors'] }],
+    '@typescript-eslint/consistent-type-imports': ['warn', { 'prefer': 'type-imports' }],
     'no-console': 'warn', // Remember, this means error!
     // 'import/no-unresolved': 'error',
     'arrow-body-style': ['error', 'as-needed'],
@@ -47,6 +49,6 @@ module.exports = {
     'no-param-reassign': 'off',
     'no-plusplus': 'off',
     'no-tabs': 'off',
-    'no-underscore-dangle': 'off',
+    'no-underscore-dangle': 'off'
   },
 };

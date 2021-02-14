@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { NoInferType } from '@nestjs/config';
-import { Ok, Redis, Callback, KeyType } from 'ioredis';
+import type { NoInferType } from '@nestjs/config';
+import type { Ok, Redis, Callback, KeyType } from 'ioredis';
 import { RedisService } from 'nestjs-redis';
 
 import { autobind } from 'utils/helpers';
 
-import { IRedisProvider } from './redis.interfaces';
+import type { IRedisProvider } from './redis.interfaces';
 
 @Injectable()
 export class RedisProvider implements IRedisProvider {
@@ -19,7 +19,7 @@ export class RedisProvider implements IRedisProvider {
     /**
      * Save an arbitrary data type in redis
      */
-    public serializeAndSet<T>(key: KeyType, value: T, cb?: Callback<Ok>): void {
+    public serializeAndSet<T>(key: KeyType, value: T, cb: Callback<Ok>): void {
         return this._redisClient.set(key, JSON.stringify(value), cb);
     }
 
@@ -33,7 +33,7 @@ export class RedisProvider implements IRedisProvider {
     /**
      * Save an arbitrary data type in redis. Key will be deleted after life expiration time.
      */
-    public serializeAndSetWithExpiration<T>(key: string, value: T, expire?: number, cb?: Callback<Ok>): void {
+    public serializeAndSetWithExpiration<T>(key: string, value: T, expire: number, cb: Callback<Ok>): void {
         if (!expire) {
             expire = 60 * 60 * 24;
         }

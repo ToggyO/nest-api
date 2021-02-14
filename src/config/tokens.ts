@@ -3,4 +3,5 @@ export const DI_TOKENS = {
     ICryptoService: Symbol('ICryptoService'),
     ITokensService: Symbol('ITokensService'),
     IRedisProvider: Symbol('IRedisProvider'),
+    IUsersRepository: Symbol('IUsersRepository'),
 };

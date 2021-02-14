@@ -1,9 +1,10 @@
-import { Inject, Injectable, NestMiddleware } from '@nestjs/common';
+import type { NestMiddleware } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { NextFunction, Response } from 'express';
+import type { NextFunction, Response } from 'express';
 
 import { DI_TOKENS } from 'config';
-import { IRequest, ISession } from 'common/api/interfaces';
+import type { IRequest, ISession } from 'common/api/interfaces';
 import { IRedisProvider } from 'providers/redis';
 import { Generator } from 'utils/generator';
 
@@ -64,14 +65,26 @@ export class SessionMiddleware implements NestMiddleware<IRequest, Response> {
                     descriptor.value = value;
                 }
                 Object.defineProperty(target, key, descriptor);
-                this._redisProvider.serializeAndSet<ISession>(session.sessionId, target);
+                this._redisProvider.serializeAndSetWithExpiration<ISession>(
+                    session.sessionId,
+                    target,
+                    60 * 60 * 24,
+                    // eslint-disable-next-line @typescript-eslint/no-empty-function
+                    () => {},
+                );
                 return true;
             },
 
             deleteProperty: (target: ISession, key: keyof ISession): boolean => {
                 if (key in target) {
                     delete target[key];
-                    this._redisProvider.serializeAndSetWithExpiration(session.sessionId, target);
+                    this._redisProvider.serializeAndSetWithExpiration(
+                        session.sessionId,
+                        target,
+                        60 * 60 * 24,
+                        // eslint-disable-next-line @typescript-eslint/no-empty-function
+                        () => {},
+                    );
                 }
                 return true;
             },

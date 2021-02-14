@@ -2,14 +2,13 @@ import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query, U
 
 import type { Response } from 'common/api/models/responses';
 import { PaginationModel, PageModel } from 'common/api/models/pagination';
-import { UserDTO } from 'modules/users/dto/UserDTO';
-import { AuthGuard } from 'common/api/guards';
+import { SessionAuthGuard } from 'common/api/guards';
+import { AllowAnonymous } from 'common/api/decorators';
 
 import { UsersHandler } from './users.handler';
-import { CreateUserDTO } from './dto/CreateUserDTO';
-import { UpdateUserDTO } from './dto/UpdateUserDTO';
+import { CreateUserDTO, UpdateUserDTO, UserDTO } from './dto';
 
-@UseGuards(AuthGuard)
+@UseGuards(SessionAuthGuard)
 @Controller('users')
 export class UsersController {
     constructor(private readonly _handler: UsersHandler) {}
@@ -20,11 +19,13 @@ export class UsersController {
     }
 
     @Get(':id')
+    @AllowAnonymous()
     public async getUserById(@Param('id', ParseIntPipe) id: number): Promise<Response<UserDTO>> {
         return this._handler.getUserById(id);
     }
 
     @Post()
+    @AllowAnonymous()
     public async createUser(@Body() createUserDto: CreateUserDTO): Promise<Response<UserDTO>> {
         return this._handler.createUser(createUserDto);
     }

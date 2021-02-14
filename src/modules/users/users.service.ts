@@ -1,21 +1,19 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+import { Inject, Injectable } from '@nestjs/common';
 
+import { DI_TOKENS } from 'config';
 import { BaseService } from 'modules/common/base.service';
 import { UserEntity } from 'domain/entities/user/user.entity';
-import { PageModel, PaginationModel } from 'common/api/models/pagination';
-import { UsersRepository } from 'dao/repositories/users/users.repository';
+import type { PageModel } from 'common/api/models/pagination';
+import { PaginationModel } from 'common/api/models/pagination';
 import { IUsersRepository } from 'dao/repositories/users/IUsersRepository';
 
 import { UsersMapper } from './users.mapper';
-import { CreateUserDTO } from './dto/CreateUserDTO';
-import { UserDTO } from './dto/UserDTO';
-import { UpdateUserDTO } from 'modules/users/dto/UpdateUserDTO';
+import type { CreateUserDTO, UserDTO, UpdateUserDTO } from './dto';
 
 @Injectable()
 export class UsersService extends BaseService {
     constructor(
-        @InjectRepository(UsersRepository) private readonly _repository: IUsersRepository,
+        @Inject(DI_TOKENS.IUsersRepository) private readonly _repository: IUsersRepository,
         private readonly _mapper: UsersMapper,
     ) {
         super();
@@ -32,7 +30,7 @@ export class UsersService extends BaseService {
         return paginationModel;
     }
 
-    public async getUser(id: number): Promise<UserDTO | null> {
+    public async getUserById(id: number): Promise<UserDTO | null> {
         const user = await this._repository.getEntity({ where: { id } });
         if (!user) {
             return null;
@@ -68,7 +66,7 @@ export class UsersService extends BaseService {
 
     public createDomainEntity(dto: CreateUserDTO): UserEntity {
         const userEntity = new UserEntity();
-        const { salt, hash } = userEntity.createSaltAndHash(dto.password);
+        const { salt, hash } = UserEntity.createSaltAndHash(dto.password);
         userEntity.firstName = dto.firstName;
         userEntity.lastName = dto.lastName;
         userEntity.email = dto.email;

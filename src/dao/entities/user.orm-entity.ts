@@ -1,9 +1,10 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 import { Roles } from 'domain/entities/user/roles.enum';
+import type { IUser } from 'domain/entities/user/IUser';
 
 @Entity({ name: 'user' })
-export class UserOrmEntity {
+export class UserOrmEntity implements IUser {
     @PrimaryGeneratedColumn()
     public id: number;
 

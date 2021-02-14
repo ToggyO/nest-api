@@ -13,5 +13,6 @@ import { TokensService } from './tokens.service';
             useClass: TokensService,
         },
     ],
+    exports: [DI_TOKENS.ITokensService],
 })
 export class TokensModule {}

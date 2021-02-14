@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 
-import { IUser } from 'domain/entities/user/IUser';
+import type { IUser } from 'domain/entities/user/IUser';
 import { UserOrmEntity } from 'dao/entities/user.orm-entity';
 
-import { UserDTO } from './dto/UserDTO';
-import { IMapper } from '../mapper/IMapper';
+import { UserDTO } from './dto';
+import type { IMapper } from '../mapper/IMapper';
 
 // TODO: check possibility to add AutoMapper
 @Injectable()

@@ -2,33 +2,48 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { sign, verify } from 'jsonwebtoken';
 
-import { IJwtTokenPayload } from 'common/api/interfaces';
+import type { IJwtTokenPayload } from 'common/api/interfaces';
+import type { IUser } from 'domain/entities/user/IUser';
 
-import { ITokensService } from './tokens.interfaces';
+import type { ITokensService } from './tokens.interfaces';
+import type { TokenDTO } from './dto';
 
 @Injectable()
 export class TokensService implements ITokensService {
     private readonly _jwtSecret: string;
-    private readonly _sessionMaxAge: string;
+    private readonly _accessLifetime: string;
+    private readonly _refreshLifetime: string;
     private readonly _redisTokenPrefix: string;
 
     constructor(private readonly _configService: ConfigService) {
         this._jwtSecret = _configService.get<string>('JWT_SECRET');
-        this._sessionMaxAge = _configService.get<string>('SESSION_MAX_AGE');
+        this._accessLifetime = _configService.get<string>('ACCESS_LIFETIME');
+        this._refreshLifetime = _configService.get<string>('REFRESH_LIFETIME');
         this._redisTokenPrefix = _configService.get<string>('REDIS_TOKEN_PREFIX');
+    }
+
+    /**
+     * Create access and refresh token object
+     */
+    public createTokenDto(user: IUser): TokenDTO {
+        const { id, firstName, lastName, email, role } = user;
+        return {
+            accessToken: this.generateToken({ id, firstName, lastName, email, role }, this._accessLifetime),
+            refreshToken: this.generateToken({ id, email }, this._refreshLifetime),
+        };
     }
 
     /**
      * Generate JWT token
      */
-    public generateToken(payload: IJwtTokenPayload): string {
+    public generateToken(payload: IJwtTokenPayload, exp: string | number): string {
         return sign(
             {
                 ...payload,
                 type: 'access',
             },
             this._jwtSecret,
-            { expiresIn: this._sessionMaxAge },
+            { expiresIn: exp },
         );
     }
 

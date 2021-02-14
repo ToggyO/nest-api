@@ -1,4 +1,4 @@
-import { Roles } from 'domain/entities/user/roles.enum';
+import type { Roles } from 'domain/entities/user/roles.enum';
 
 export class UserDTO {
     public id: number;

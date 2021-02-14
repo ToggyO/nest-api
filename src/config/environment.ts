@@ -52,7 +52,10 @@ export class EnvironmentVariables {
     public JWT_SECRET: string;
 
     @IsNotEmpty()
-    public SESSION_MAX_AGE: string;
+    public ACCESS_LIFETIME: string;
+
+    @IsNotEmpty()
+    public REFRESH_LIFETIME: string;
 
     @IsNotEmpty()
     public REDIS_HOST: string;
