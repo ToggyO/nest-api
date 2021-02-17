@@ -1,5 +1,5 @@
-import { PageModel } from 'common/api/models/pagination';
-import { TypeOrmPagination } from 'dao/repositories/types';
+import type { PageModel } from 'common/api/models/pagination';
+import type { TypeOrmPagination } from 'dao/repositories/types';
 
 export class BaseService {
     protected _getPagination(pageModel: PageModel): TypeOrmPagination {

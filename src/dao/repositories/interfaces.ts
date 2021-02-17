@@ -1,8 +1,8 @@
-import { FindOneOptions } from 'typeorm';
+import type { FindOneOptions } from 'typeorm';
 
-import { PaginationModel } from 'common/api/models/pagination';
+import type { PaginationModel } from 'common/api/models/pagination';
 
-import { FindListParameters } from './types';
+import type { FindListParameters } from './types';
 
 export interface IBaseRepository<Entity> {
     getList(payload: FindListParameters<Entity>): Promise<PaginationModel<Entity>>;

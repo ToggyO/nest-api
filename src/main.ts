@@ -2,7 +2,7 @@ import 'module-alias/register';
 
 import { NestFactory } from '@nestjs/core';
 import { Logger } from '@nestjs/common';
-import { NestExpressApplication } from '@nestjs/platform-express';
+import type { NestExpressApplication } from '@nestjs/platform-express';
 
 import { AppModule } from './app.module';
 import { AppSettings } from './app.settings';

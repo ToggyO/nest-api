@@ -1,11 +1,12 @@
-import { EntityRepository, FindOneOptions } from 'typeorm';
+import type { FindOneOptions } from 'typeorm';
+import { EntityRepository } from 'typeorm';
 
 import { UserOrmEntity } from 'dao/entities/user.orm-entity';
-import { PaginationModel } from 'common/api/models/pagination';
+import type { PaginationModel } from 'common/api/models/pagination';
 
-import { IUsersRepository } from './IUsersRepository';
+import type { IUsersRepository } from './IUsersRepository';
 import { BaseRepository } from '../base.repository';
-import { FindListParameters } from '../types';
+import type { FindListParameters } from '../types';
 
 @EntityRepository(UserOrmEntity)
 export class UsersRepository extends BaseRepository<UserOrmEntity> implements IUsersRepository {

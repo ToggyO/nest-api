@@ -3,7 +3,7 @@ import { Repository } from 'typeorm';
 import { isObjectEmpty } from 'utils/helpers';
 import { PaginationModel } from 'common/api/models/pagination';
 
-import { TypeOrmPagination } from './types';
+import type { TypeOrmPagination } from './types';
 
 export class BaseRepository<T> extends Repository<T> {
     /**

@@ -1,4 +1,5 @@
-import { ArgumentMetadata, ParseIntPipe } from '@nestjs/common';
+import type { ArgumentMetadata } from '@nestjs/common';
+import { ParseIntPipe } from '@nestjs/common';
 
 import { PipeExceptionFactories } from './PipeExceptionFactories';
 

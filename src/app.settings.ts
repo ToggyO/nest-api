@@ -1,8 +1,8 @@
-import { NestExpressApplication } from '@nestjs/platform-express';
+import type { NestExpressApplication } from '@nestjs/platform-express';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
-import { Environment } from 'config';
+import type { Environment } from 'config';
 import { HttpStatusCodeInterceptor } from 'common/api/interceptors';
 import { TransformHttpExceptionFilter } from 'common/api/filters';
 import { PipeExceptionFactories } from 'common/api/pipes';

@@ -1,4 +1,5 @@
-import { Module, RequestMethod, MiddlewareConsumer } from '@nestjs/common';
+import type { MiddlewareConsumer } from '@nestjs/common';
+import { Module, RequestMethod } from '@nestjs/common';
 
 import { AppModuleConfiguration } from 'config';
 import { SessionMiddleware } from 'common/api/middleware';

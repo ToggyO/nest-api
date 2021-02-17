@@ -3,7 +3,7 @@ import fs from 'fs';
 
 import dotenv from 'dotenv';
 
-import { Environment } from 'config';
+import type { Environment } from 'config';
 
 import { getOrmConfig } from './ormconfig';
 

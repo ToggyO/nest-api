@@ -1,7 +1,7 @@
-import { Request } from 'express';
+import type { Request } from 'express';
 
-import { ISession } from './ISession';
-import { IJwtTokenPayload } from './IJwtTokenPayload';
+import type { ISession } from './ISession';
+import type { IJwtTokenPayload } from './IJwtTokenPayload';
 
 export interface IRequest extends Request {
     session?: ISession;

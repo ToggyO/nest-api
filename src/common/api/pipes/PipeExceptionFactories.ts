@@ -1,11 +1,12 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
+import type { HttpException } from '@nestjs/common';
+import { HttpStatus } from '@nestjs/common';
 
 import { ApiError } from 'common/api/models/responses';
 import { ApplicationHttpException } from 'common/api/exceptions';
 import { ErrorCodes, ErrorMessages } from 'common/api/errors';
 import { isObjectEmpty } from 'utils/helpers';
 
-import { ExtendedValidationError } from './interfaces';
+import type { ExtendedValidationError } from './interfaces';
 
 export class PipeExceptionFactories {
     public static validationPipeExceptionFactory(errors: Array<ExtendedValidationError>) {

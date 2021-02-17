@@ -1,6 +1,6 @@
 import { HttpException } from '@nestjs/common';
 
-import { IApplicationHttpExceptionDTO } from './interfaces';
+import type { IApplicationHttpExceptionDTO } from './interfaces';
 
 export class ApplicationHttpException extends HttpException {
     constructor(errorDto: IApplicationHttpExceptionDTO) {

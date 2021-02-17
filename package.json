@@ -36,7 +36,8 @@
     "rxjs": "^6.6.3",
     "sqlite3": "^5.0.1",
     "typeorm": "^0.2.30",
-    "typescript": "^4.0.5"
+    "typescript": "^4.0.5",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.5.1",

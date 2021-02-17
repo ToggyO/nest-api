@@ -1,6 +1,6 @@
 import { join } from 'path';
 
-import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import type { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 import { Environment } from 'config/environment';
 

@@ -1,5 +1,5 @@
-import { UserOrmEntity } from 'dao/entities/user.orm-entity';
+import type { UserOrmEntity } from 'dao/entities/user.orm-entity';
 
-import { IBaseRepository } from '../interfaces';
+import type { IBaseRepository } from '../interfaces';
 
 export type IUsersRepository = IBaseRepository<UserOrmEntity>;
