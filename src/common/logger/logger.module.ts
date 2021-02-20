@@ -1,15 +1,15 @@
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 
-import { DI_TOKENS, Environment } from 'config';
+import { DI_TOKENS } from 'config';
+import { Environment } from 'config/environment';
 
-import { LocalLogger } from './logger.local';
 import { ProductionLogger } from './logger.production';
 
 @Module({
     providers: [
         {
             provide: DI_TOKENS.ILogger,
-            useClass: process.env.NODE_ENV === Environment.Development ? LocalLogger : ProductionLogger,
+            useClass: process.env.NODE_ENV === Environment.Development ? Logger : ProductionLogger,
         },
     ],
     exports: [DI_TOKENS.ILogger],

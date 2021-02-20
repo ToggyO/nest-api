@@ -1,16 +1,4 @@
-import {
-    Body,
-    Controller,
-    Delete,
-    Get,
-    LoggerService,
-    Param,
-    ParseIntPipe,
-    Post,
-    Put,
-    Query,
-    UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query, UseGuards } from '@nestjs/common';
 
 import type { Response } from 'common/api/models/responses';
 import { PaginationModel, PageModel } from 'common/api/models/pagination';
@@ -23,9 +11,7 @@ import { CreateUserDTO, UpdateUserDTO, UserDTO } from './dto';
 @UseGuards(SessionAuthGuard)
 @Controller('users')
 export class UsersController {
-    constructor(private readonly _handler: UsersHandler, private readonly _logger: LoggerService) {
-        _logger.log('TEST');
-    }
+    constructor(private readonly _handler: UsersHandler) {}
 
     @Get()
     public async getUsers(@Query() pageModel: PageModel): Promise<Response<PaginationModel<UserDTO>>> {

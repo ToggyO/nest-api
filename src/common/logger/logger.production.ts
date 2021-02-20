@@ -1,60 +1,43 @@
-import type { LogLevel } from '@nestjs/common';
-import { Injectable, Scope } from '@nestjs/common';
-import type { Logger as WinstonLogger } from 'winston';
-import { transports, format, createLogger } from 'winston';
+import path from 'path';
+import fs from 'fs';
 
-import { CommonLogger } from './logger.common';
-import pack from '../../../package.json';
+import { Injectable, Logger, Scope } from '@nestjs/common';
 
-const { combine } = format;
+import { LogToFile } from './utils/log-to-file.decorator';
 
 @Injectable({ scope: Scope.TRANSIENT })
-export class ProductionLogger extends CommonLogger {
-    constructor(protected readonly _catalogName: string) {
-        super({ name: pack.name, version: pack.version });
+export class ProductionLogger extends Logger {
+    public static catalogName = 'log';
+
+    constructor() {
+        super();
+        // ensure log directory exists
+        const logDirectory = path.join(__dirname, `../../../${ProductionLogger.catalogName}`);
+        fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
     }
 
+    @LogToFile({ catalogName: ProductionLogger.catalogName })
     public log(message: any, context?: string) {
         super.log(message, context);
     }
 
+    @LogToFile({ catalogName: ProductionLogger.catalogName })
     public error(message: any, trace?: string, context?: string) {
         super.error(message, trace, context);
     }
 
+    @LogToFile({ catalogName: ProductionLogger.catalogName })
     public warn(message: any, context?: string) {
         super.warn(message, context);
     }
 
+    @LogToFile({ catalogName: ProductionLogger.catalogName })
     public debug(message: any, context?: string) {
         super.debug(message, context);
     }
 
+    @LogToFile({ catalogName: ProductionLogger.catalogName })
     public verbose(message: any, context?: string) {
         super.verbose(message, context);
     }
-
-    protected _createFileTransport(level: LogLevel) {
-        const custom = this._transportFormatterCustom();
-        const fileTransport = new transports.File({
-            level,
-            filename: `file#${level}`,
-            maxsize: 10485760, // 10MB
-            maxFiles: 5,
-            format: combine(custom({ type: 'file' })),
-        });
-        return [fileTransport];
-    }
-
-    protected _createFileLogger(level: LogLevel): WinstonLogger {
-        const { name } = this._options;
-        return createLogger({
-            level,
-            defaultMeta: { service: name },
-            transports: this._createFileTransport(level),
-            exitOnError: false,
-        });
-    }
-
-    protected _logMethodsFabric() {}
 }
