@@ -2,13 +2,15 @@ import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query, U
 
 import type { Response } from 'common/api/models/responses';
 import { PaginationModel, PageModel } from 'common/api/models/pagination';
-import { SessionAuthGuard } from 'common/api/guards';
+import { SessionAuthGuard, JwtAuthGuard } from 'common/api/guards';
 import { AllowAnonymous } from 'common/api/decorators';
 
 import { UsersHandler } from './users.handler';
 import { CreateUserDTO, UpdateUserDTO, UserDTO } from './dto';
 
-@UseGuards(SessionAuthGuard)
+// FIXME:
+// @UseGuards(SessionAuthGuard)
+@UseGuards(JwtAuthGuard)
 @Controller('users')
 export class UsersController {
     constructor(private readonly _handler: UsersHandler) {}

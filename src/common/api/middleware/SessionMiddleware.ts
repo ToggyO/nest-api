@@ -11,14 +11,12 @@ import { Generator } from 'utils/generator';
 @Injectable()
 export class SessionMiddleware implements NestMiddleware<IRequest, Response> {
     private readonly _identityHeader: string;
-    private readonly _redisTokenPrefix: string;
 
     constructor(
         private readonly _configService: ConfigService,
         @Inject(DI_TOKENS.IRedisProvider) private readonly _redisProvider: IRedisProvider,
     ) {
         this._identityHeader = _configService.get<string>('IDENTITY_HEADER');
-        this._redisTokenPrefix = _configService.get<string>('REDIS_TOKEN_PREFIX');
     }
 
     public async use(req: IRequest, res: Response, next: NextFunction): Promise<void> {

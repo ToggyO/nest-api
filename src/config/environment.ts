@@ -51,11 +51,11 @@ export class EnvironmentVariables {
     @IsNotEmpty()
     public JWT_SECRET: string;
 
-    @IsNotEmpty()
-    public ACCESS_LIFETIME: string;
+    @IsNumber()
+    public ACCESS_LIFETIME: number;
 
-    @IsNotEmpty()
-    public REFRESH_LIFETIME: string;
+    @IsNumber()
+    public REFRESH_LIFETIME: number;
 
     @IsNotEmpty()
     public REDIS_HOST: string;

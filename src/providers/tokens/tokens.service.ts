@@ -3,7 +3,6 @@ import { ConfigService } from '@nestjs/config';
 import { sign, verify } from 'jsonwebtoken';
 
 import type { IJwtTokenPayload } from 'common/api/interfaces';
-import type { IUser } from 'domain/entities/user/IUser';
 
 import type { ITokensService } from './tokens.interfaces';
 import type { TokenDTO } from './dto';
@@ -25,11 +24,10 @@ export class TokensService implements ITokensService {
     /**
      * Create access and refresh token object
      */
-    public createTokenDto(user: IUser): TokenDTO {
-        const { id, firstName, lastName, email, role } = user;
+    public createTokenDto(userId: number): TokenDTO {
         return {
-            accessToken: this.generateToken({ id, firstName, lastName, email, role }, this._accessLifetime),
-            refreshToken: this.generateToken({ id, email }, this._refreshLifetime),
+            accessToken: this.generateToken({ id: userId }, this._accessLifetime),
+            refreshToken: this.generateToken({ id: userId }, this._refreshLifetime),
         };
     }
 

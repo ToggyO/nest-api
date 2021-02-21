@@ -15,10 +15,11 @@ const config = new AppModuleConfiguration();
     exports: [...config.exports],
 })
 export class AppModule {
-    configure(consumer: MiddlewareConsumer) {
-        consumer.apply(SessionMiddleware).forRoutes({
-            path: '*',
-            method: RequestMethod.ALL,
-        });
-    }
+    // FIXME:
+    // configure(consumer: MiddlewareConsumer) {
+    //     consumer.apply(SessionMiddleware).forRoutes({
+    //         path: '*',
+    //         method: RequestMethod.ALL,
+    //     });
+    // }
 }

@@ -1,2 +1,2 @@
-export { ApplicationHttpException } from './ApplicationHttpException';
+export * from './custom-exceptions';
 export * from './interfaces';

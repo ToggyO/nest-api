@@ -29,6 +29,8 @@ export class TransformHttpExceptionFilter implements ExceptionFilter {
                 return ErrorCodes.Global.badParameters;
             case HttpStatus.FORBIDDEN:
                 return ErrorCodes.Global.forbidden;
+            case HttpStatus.UNAUTHORIZED:
+                return ErrorCodes.Global.unauthorized;
             default:
                 return ErrorCodes.System.internalServerError;
         }
