@@ -45,18 +45,19 @@ export class JwtAuthGuard implements CanActivate {
             throw new UnauthorizedException();
         }
 
-        let user: IJwtTokenPayload;
+        let payload: { guid: string };
         try {
-            user = verify(accessToken, this._jwtSecret) as IJwtTokenPayload;
+            payload = verify(accessToken, this._jwtSecret) as { guid: string };
         } catch (error) {
             throw new UnauthorizedException();
         }
 
-        const authDto = await this._redisProvider.getAndDeserializeAsync<AuthDTO>(user.id.toString());
+        const authDto = await this._redisProvider.getAndDeserializeAsync<AuthDTO>(payload.guid);
         if (!authDto || authDto.tokens.accessToken !== accessToken) {
             throw new InvalidTokenHttpException();
         }
         request.user = authDto.user;
+        request.guid = payload.guid;
         return true;
     }
 }

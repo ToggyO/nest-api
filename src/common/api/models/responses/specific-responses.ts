@@ -25,6 +25,18 @@ export class SecurityErrorResponse<T> extends ErrorResponse<T> {
 
 export class AccessTokenInvalidErrorResponse<T> extends ErrorResponse<T> {
     public statusCode = HttpStatus.UNAUTHORIZED;
+    public code = ErrorCodes.Security.accessTokenInvalid;
+    public message = ErrorMessages.Security.accessTokenInvalid;
+    constructor(errors?: Array<ApiError>) {
+        super();
+        if (errors) {
+            this.errors = errors;
+        }
+    }
+}
+
+export class AccessTokenExpiredErrorResponse<T> extends ErrorResponse<T> {
+    public statusCode = HttpStatus.UNAUTHORIZED;
     public code = ErrorCodes.Security.accessTokenExpired;
     public message = ErrorMessages.Security.accessTokenExpired;
     constructor(errors?: Array<ApiError>) {
@@ -36,6 +48,18 @@ export class AccessTokenInvalidErrorResponse<T> extends ErrorResponse<T> {
 }
 
 export class RefreshTokenInvalidErrorResponse<T> extends ErrorResponse<T> {
+    public statusCode = HttpStatus.CONFLICT;
+    public code = ErrorCodes.Security.refreshTokenInvalid;
+    public message = ErrorMessages.Security.refreshTokenInvalid;
+    constructor(errors?: Array<ApiError>) {
+        super();
+        if (errors) {
+            this.errors = errors;
+        }
+    }
+}
+
+export class RefreshTokenExpiredErrorResponse<T> extends ErrorResponse<T> {
     public statusCode = HttpStatus.UNAUTHORIZED;
     public code = ErrorCodes.Security.refreshTokenExpired;
     public message = ErrorMessages.Security.refreshTokenExpired;

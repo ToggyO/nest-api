@@ -1,3 +1,3 @@
-export { AuthDTO } from './AuthDTO';
-export { CredentialsDTO } from './CredentialsDTO';
-export { RefreshTokenDTO } from './RefreshTokenDTO';
+export { AuthDTO } from './auth.dto';
+export { CredentialsDTO } from './credentials.dto';
+export { RefreshTokenDTO } from './refresh-token.dto';

@@ -2,8 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { sign, verify } from 'jsonwebtoken';
 
-import type { IJwtTokenPayload } from 'common/api/interfaces';
-
 import type { ITokensService } from './tokens.interfaces';
 import type { TokenDTO } from './dto';
 
@@ -24,17 +22,17 @@ export class TokensService implements ITokensService {
     /**
      * Create access and refresh token object
      */
-    public createTokenDto(userId: number): TokenDTO {
+    public createTokenDto(guid: string): TokenDTO {
         return {
-            accessToken: this.generateToken({ id: userId }, this._accessLifetime),
-            refreshToken: this.generateToken({ id: userId }, this._refreshLifetime),
+            accessToken: this.generateToken({ guid }, this._accessLifetime),
+            refreshToken: this.generateToken({ guid }, this._refreshLifetime),
         };
     }
 
     /**
      * Generate JWT token
      */
-    public generateToken(payload: IJwtTokenPayload, exp: string | number): string {
+    public generateToken(payload: Record<string, any>, exp: string | number): string {
         return sign(
             {
                 ...payload,

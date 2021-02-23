@@ -5,7 +5,7 @@ import { ConfigService } from '@nestjs/config';
 import type { Observable } from 'rxjs';
 import { verify } from 'jsonwebtoken';
 
-import type { IJwtTokenPayload, IRequest } from 'common/api/interfaces';
+import type { IRequest } from 'common/api/interfaces';
 
 import { IS_PUBLIC_KEY } from '../decorators';
 
@@ -31,13 +31,12 @@ export class SessionAuthGuard implements CanActivate {
         if (!session) {
             return false;
         }
-        const { token } = session;
+        const { token, user } = session;
         if (!token) {
             return false;
         }
-        let user: IJwtTokenPayload;
         try {
-            user = verify(token, this._jwtSecret) as IJwtTokenPayload;
+            verify(token, this._jwtSecret);
         } catch (error) {
             delete session.token;
             return false;

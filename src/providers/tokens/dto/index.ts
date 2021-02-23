@@ -1,1 +1,1 @@
-export { TokenDTO } from './TokenDTO';
+export { TokenDTO } from './token.dto';

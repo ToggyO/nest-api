@@ -6,4 +6,5 @@ import type { IJwtTokenPayload } from './IJwtTokenPayload';
 export interface IRequest extends Request {
     session?: ISession;
     user?: IJwtTokenPayload;
+    guid?: string;
 }

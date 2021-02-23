@@ -15,7 +15,7 @@ export type BootstrappingServerSettings = {
 };
 
 export class AppSettings {
-    public static load(app: NestExpressApplication): BootstrappingServerSettings {
+    public static configure(app: NestExpressApplication): BootstrappingServerSettings {
         const config = app.get(ConfigService);
         const nodeEnv = config.get<Environment>('NODE_ENV');
         const host = config.get<string>('HOST');

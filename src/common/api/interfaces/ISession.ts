@@ -1,5 +1,7 @@
+import type { IJwtTokenPayload } from './IJwtTokenPayload';
+
 export interface ISession {
     sessionId: string;
     token?: string;
-    // user?: ;
+    user?: IJwtTokenPayload;
 }

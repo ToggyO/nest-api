@@ -1,4 +1,4 @@
-import type { UserDTO } from 'modules/users/dto/UserDTO';
+import type { UserDTO } from 'modules/users/dto/user.dto';
 
 import type { TokenDTO } from 'providers/tokens/dto';
 

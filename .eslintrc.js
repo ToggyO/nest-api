@@ -38,6 +38,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-empty-function': ['error', { 'allow': ['methods','constructors'] }],
     '@typescript-eslint/consistent-type-imports': ['warn', { 'prefer': 'type-imports' }],
+    '@typescript-eslint/no-inferrable-types': 'warn',
     'no-console': 'warn', // Remember, this means error!
     // 'import/no-unresolved': 'error',
     'arrow-body-style': ['error', 'as-needed'],
