@@ -1,7 +1,7 @@
 Nest API
 ======
 
-####Development
+#### Development
 1. Run `npm install`;
 2. Create docker containers with Redis and PostgreSQL:
    1. `cd launch/dev`;
@@ -14,7 +14,7 @@ Nest API
 - To remove containers, use `db_remove_dev.sh` (or `db_remove_dev_with_volumes.sh`)
 from `launc/dev` directory.
     
-####Publication
+#### Publication
 1. Create docker container:
    1. `cd launch/stage`;
    2. `. start_stage.sh`
