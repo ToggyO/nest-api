@@ -1,9 +1,5 @@
-import { IsNotEmpty } from 'class-validator';
+import { PickType } from '@nestjs/swagger';
 
-export class UpdateUserDTO {
-    @IsNotEmpty()
-    public firstName: string;
+import { CreateUserDTO } from './create-user.dto';
 
-    @IsNotEmpty()
-    public lastName: string;
-}
+export class UpdateUserDTO extends PickType(CreateUserDTO, ['firstName', 'lastName']) {}

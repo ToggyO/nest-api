@@ -6,15 +6,16 @@ export class createTableUsers1612030379718 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`
             CREATE TABLE "user" (
-                "id" integer PRIMARY KEY AUTOINCREMENT NOT NULL,
-                "firstName" text NOT NULL,
-                "lastName" text NOT NULL,
-                "email" text NOT NULL,
-                "passwordHash" text NOT NULL,
-                "salt" text NOT NULL,
-                "role" varchar CHECK( role IN ('0','1') ) NOT NULL DEFAULT (0),
-                "avatar" text, "created_at" datetime NOT NULL DEFAULT (datetime('now')),
-                "updated_at" datetime NOT NULL DEFAULT (datetime('now'))
+                "id" SERIAL PRIMARY KEY,
+                "firstName" VARCHAR(255) NOT NULL,
+                "lastName" VARCHAR(255) NOT NULL,
+                "email" VARCHAR(255) NOT NULL,
+                "passwordHash" VARCHAR(255) NOT NULL,
+                "salt" VARCHAR(255) NOT NULL,
+                "role" SMALLINT CHECK( role IN ('0','1') ) NOT NULL DEFAULT 0,
+                "avatar" TEXT,
+                "created_at" TIMESTAMP NOT NULL DEFAULT NOW(),
+                "updated_at" TIMESTAMP NOT NULL DEFAULT NOW()
             )`);
     }
 

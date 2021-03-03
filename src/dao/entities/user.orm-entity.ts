@@ -29,9 +29,9 @@ export class UserOrmEntity implements IUser {
     @Column({ type: 'text', nullable: true })
     public avatar: string;
 
-    @CreateDateColumn({ name: 'created_at', type: 'datetime' })
+    @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
     protected createdAt: Date;
 
-    @UpdateDateColumn({ name: 'updated_at', type: 'datetime' })
+    @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
     protected updatedAt: Date;
 }

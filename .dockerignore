@@ -3,3 +3,5 @@
 /data
 /log
 /todo-list.md
+/postgres-volume
+/redis-volume

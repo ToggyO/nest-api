@@ -37,9 +37,6 @@ export class EnvironmentVariables {
     public PORT: number;
 
     @IsNotEmpty()
-    public DB_NAME: string;
-
-    @IsNotEmpty()
     public CRYPTO_SECRET: string;
 
     @IsNotEmpty()
@@ -74,4 +71,22 @@ export class EnvironmentVariables {
 
     @IsNotEmpty()
     public REDIS_TOKEN_PREFIX: string;
+
+    @IsNotEmpty()
+    public POSTGRES_HOST: string;
+
+    @IsNumber()
+    public POSTGRES_PORT: number;
+
+    @IsNumber()
+    public POSTGRES_EXTERNAL_PORT: number;
+
+    @IsNotEmpty()
+    public POSTGRES_USER: string;
+
+    @IsNotEmpty()
+    public POSTGRES_DATABASE: string;
+
+    @IsNotEmpty()
+    public POSTGRES_PASSWORD: string;
 }

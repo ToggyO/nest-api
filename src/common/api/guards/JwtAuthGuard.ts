@@ -10,7 +10,7 @@ import type { AuthDTO } from 'modules/auth/dto';
 
 import { IS_PUBLIC_KEY } from '../decorators';
 import { InvalidTokenHttpException } from '../exceptions';
-import type { IJwtTokenPayload, IRequest } from '../interfaces';
+import type { IRequest } from '../interfaces';
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
@@ -53,7 +53,7 @@ export class JwtAuthGuard implements CanActivate {
         }
 
         const authDto = await this._redisProvider.getAndDeserializeAsync<AuthDTO>(payload.guid);
-        if (!authDto || authDto.tokens.accessToken !== accessToken) {
+        if (!authDto) {
             throw new InvalidTokenHttpException();
         }
         request.user = authDto.user;

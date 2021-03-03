@@ -1,5 +1,5 @@
 import { Body, Controller, Get, HttpStatus, Post, Put, Req, Session, UseGuards } from '@nestjs/common';
-import { ApiExcludeEndpoint, ApiExtraModels, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiExcludeEndpoint, ApiExtraModels, ApiTags } from '@nestjs/swagger';
 
 import { IRequest, ISession } from 'common/api/interfaces';
 import { JwtAuthGuard } from 'common/api/guards';
@@ -52,6 +52,7 @@ export class AuthController {
 
     @Get('logout/token')
     @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth()
     @ApiSuccessfulOperation()
     @ApiErrorResponse(HttpStatus.UNAUTHORIZED)
     public async logoutWithToken(@Req() request: IRequest): Promise<Response<void>> {
